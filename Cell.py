@@ -6,3 +6,14 @@ class Cell:
         self.alive = alive
         self.location = location
         self.neighbors = neighbors
+
+    def determine_state(cell):
+        alive = 0
+        for neighbor in cell.neighbors:
+            if neighbor.alive == True: alive += 1
+        
+        if cell.alive:
+            if alive < 2: cell.alive = False
+            elif alive >= 4: cell.alive = False
+        else:
+            if alive == 3: cell.alive = True
