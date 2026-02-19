@@ -11,21 +11,33 @@ class Canvas:
 
     def hydrate(self, random):
         alive = 0 if not random else randint(0, 1)
-        cells_to_neighborate = [Cell(alive, [0, 0])] # Initial cell added
+        initial_cell = Cell(alive, [0, 0])
+        cells_to_neighborate = [initial_cell] # Initial cell added
+        self.grid.append([initial_cell])
+        track_neighbors = {(initial_cell.location[0], initial_cell.location[1])}
 
         for cell in cells_to_neighborate:
             location = cell.location
-            for angle in range(-180, 181, 45):
-                angle = radians(angle)
-                nei_alive = 0 if not random else randint(0, 1)
-                nei_x = location[0] + cos(angle)
-                nei_y = location[1] + sin(angle)
-                if nei_x < 0 or nei_x >= self.size[0] or nei_y < 0 or nei_y >= self.size[1]:
+
+            for angle in range(180, -180, -45):
+                rad_angle = radians(angle)
+                cos_angle = round(cos(rad_angle))
+                sin_angle = round(sin(rad_angle))
+                offset_x = int(cos_angle / abs(cos_angle)) if cos_angle != 0 else 0
+                offset_y = int(sin_angle / abs(sin_angle)) if sin_angle != 0 else 0
+
+                nei_x = location[0] + offset_x
+                nei_y = location[1] + offset_y
+
+                if (nei_x < 0 or nei_x >= self.size[1] or nei_y < 0 or nei_y >= self.size[0]) or ((nei_x, nei_y) in track_neighbors):
                     continue
+
                 nei_location = [nei_x, nei_y]
+                nei_alive = 0 if not random else randint(0, 1)
+
                 neighbor = Cell(nei_alive, nei_location)
                 cells_to_neighborate.append(neighbor)
+                track_neighbors.add((nei_x, nei_y))
 
-                if len(self.grid) < nei_x: self.grid.insert(nei_x, [])
+                if len(self.grid) <= nei_x: self.grid.insert(nei_x, [])
                 self.grid[nei_x].insert(nei_y, neighbor)
-        
