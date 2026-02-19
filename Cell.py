@@ -17,3 +17,6 @@ class Cell:
             elif alive >= 4: cell.alive = False
         else:
             if alive == 3: cell.alive = True
+    
+    def __str__(self):
+        return str(self.location)
