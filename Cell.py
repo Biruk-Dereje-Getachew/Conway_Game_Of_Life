@@ -16,11 +16,11 @@ class Cell:
             if neighbor.alive == True: alive_count += 1
         
         if cell.alive:
-            if alive_count < 2: cell.alive = False
-            elif alive_count >= 4: cell.alive = False
-            else: cell.alive = True
+            if alive_count < 2: cell.next_state = False
+            elif alive_count >= 4: cell.next_state = False
+            else: cell.next_state = True
         else:
-            if alive_count == 3: cell.alive = True
+            if alive_count == 3: cell.next_state = True
     
     def __str__(self):
         return f"{self.alive}" + str(self.location)
