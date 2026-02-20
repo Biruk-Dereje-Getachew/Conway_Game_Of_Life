@@ -40,4 +40,7 @@ class Canvas:
                 track_neighbors.add((nei_x, nei_y))
 
                 if len(self.grid) <= nei_x: self.grid.insert(nei_x, [])
-                self.grid[nei_x].insert(nei_y, neighbor)
+                if nei_y >= len(self.grid[nei_x]):
+                    for _ in range((nei_y + 1) - len(self.grid[nei_x])):
+                        self.grid[nei_x].append(object())
+                self.grid[nei_x][nei_y] = neighbor
