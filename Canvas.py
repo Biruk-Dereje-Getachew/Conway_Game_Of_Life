@@ -44,3 +44,11 @@ class Canvas:
                     for _ in range((nei_y + 1) - len(self.grid[nei_x])):
                         self.grid[nei_x].append(object())
                 self.grid[nei_x][nei_y] = neighbor
+
+    def __str__(self):
+        canvas_description = ""
+        for row in self.grid:
+            for cell in row:
+                canvas_description += f"{cell.alive} "
+            canvas_description += "\n"
+        return canvas_description
