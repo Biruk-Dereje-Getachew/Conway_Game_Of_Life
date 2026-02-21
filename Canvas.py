@@ -40,6 +40,15 @@ class Canvas:
                     neighbor = self.grid[nei_x][nei_y]
                     cell.neighbors.append(neighbor)
 
+    def iterate(self):
+        for row in self.grid:
+            for cell in row:
+                cell.determine_state()
+
+        for row in self.grid:
+            for cell in row:
+                cell.alive = cell.next_state
+
     def __str__(self):
         canvas_description = ""
         for row in self.grid:
