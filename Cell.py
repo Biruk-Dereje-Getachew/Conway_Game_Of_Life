@@ -4,11 +4,11 @@ class Cell:
     location = [0, 0]
     neighbors = []
 
-    def __init__(self, alive=0, location = [0, 0], neighbors=[]):
+    def __init__(self, alive=0, location = [0, 0], neighbors=list()):
         self.alive = alive
         self.next_state = alive
         self.location = location
-        self.neighbors = neighbors
+        self.neighbors = list()
 
     def determine_state(cell):
         alive_count = 0

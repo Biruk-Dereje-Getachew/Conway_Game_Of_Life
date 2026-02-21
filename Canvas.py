@@ -8,6 +8,7 @@ class Canvas:
     def __init__(self, size=[10, 10], random=False):
         self.size = size
         self.hydrate(random)
+        self.neighborate()
 
     def hydrate(self, random):
         for x in range(self.size[0]):
@@ -17,6 +18,27 @@ class Canvas:
                 cell = Cell(cell_alive, [x, y])
                 row.append(cell)
             self.grid.append(row)
+    
+    def neighborate(self):
+        for row in self.grid:
+            for cell in row:
+
+                location = cell.location
+                for angle in range(180, -180, -45):
+                    rad_angle = radians(angle)
+                    cos_angle = round(cos(rad_angle), 2)
+                    sin_angle = round(sin(rad_angle), 2)
+                    offset_x = int(cos_angle / abs(cos_angle)) if cos_angle != 0 else 0
+                    offset_y = int(sin_angle / abs(sin_angle)) if sin_angle != 0 else 0
+
+                    nei_x = location[0] + offset_x
+                    nei_y = location[1] + offset_y
+
+                    if (nei_x < 0 or nei_x >= self.size[0] or nei_y < 0 or nei_y >= self.size[1]):
+                        continue
+
+                    neighbor = self.grid[nei_x][nei_y]
+                    cell.neighbors.append(neighbor)
 
     def __str__(self):
         canvas_description = ""
