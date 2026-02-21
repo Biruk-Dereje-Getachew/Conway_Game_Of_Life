@@ -3,17 +3,17 @@ from random import randint
 from math import radians, sin, cos
 
 class Canvas:
-    size = [0, 0]
+    _size = [0, 0]
     grid = []
     def __init__(self, size=[10, 10], random=False):
-        self.size = size
+        self._size = size
         self.hydrate(random)
         self.neighborate()
 
     def hydrate(self, random):
-        for x in range(self.size[0]):
+        for x in range(self._size[0]):
             row = []
-            for y in range(self.size[1]):
+            for y in range(self._size[1]):
                 cell_alive = randint(0, 1) if random else 0
                 cell = Cell(cell_alive, [x, y])
                 row.append(cell)
@@ -34,7 +34,7 @@ class Canvas:
                     nei_x = location[0] + offset_x
                     nei_y = location[1] + offset_y
 
-                    if (nei_x < 0 or nei_x >= self.size[0] or nei_y < 0 or nei_y >= self.size[1]):
+                    if (nei_x < 0 or nei_x >= self._size[0] or nei_y < 0 or nei_y >= self._size[1]):
                         continue
 
                     neighbor = self.grid[nei_x][nei_y]
