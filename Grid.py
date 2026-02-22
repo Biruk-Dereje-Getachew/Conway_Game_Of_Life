@@ -43,11 +43,11 @@ class Grid:
     def iterate(self):
         for row in self.grid:
             for cell in row:
-                cell.determine_state()
-
+                cell.alive = cell.next_state
         for row in self.grid:
             for cell in row:
-                cell.alive = cell.next_state
+                cell.determine_state()
+
 
     def __str__(self):
         canvas_description = ""
