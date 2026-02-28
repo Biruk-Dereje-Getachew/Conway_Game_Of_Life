@@ -6,11 +6,11 @@ class Cell:
 
     def __init__(self, alive=0, location = [0, 0]):
         self.alive = alive
-        self.next_state = alive
-        self.location = location
+        self.next_state = alive # Variable set up to enable evolution of the game
+        self.location = location # Location in the grid it will be set in
         self.neighbors = list()
 
-    def determine_state(self):
+    def determine_state(self): # Logic of the game of life for an individual cell
         alive_count = 0
         for neighbor in self.neighbors:
             if neighbor.alive == 1: alive_count += 1
