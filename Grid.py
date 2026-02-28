@@ -39,7 +39,7 @@ class Grid:
                         Location of the neighbor to the left of the cell: [3, 5]
                         Corresponding angle measured from the positive x axis to the location of the neighbor with the cell being origin: 180
                         cos(180) = -1
-                        sin(180) = 1
+                        sin(180) = 0
                         Location of cell + [cos value, sin value] = Location of neighbor
                         '''
                 for angle in range(180, -180, -45):
